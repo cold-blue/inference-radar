@@ -1,0 +1,149 @@
+github:
+  repositories:
+    - vllm-project/vllm
+    - sgl-project/sglang
+    - NVIDIA/TensorRT-LLM
+    - flashinfer-ai/flashinfer
+    - NVIDIA/cutlass
+    - triton-lang/triton
+    - pytorch/pytorch
+    - NVIDIA/nccl
+    - ai-dynamo/dynamo
+    - deepseek-ai/DeepEP
+    - deepseek-ai/DeepGEMM
+
+  lookback_hours: 48
+  max_items_per_repo: 30
+
+arxiv:
+  max_results_per_query: 12
+  lookback_days: 7
+  queries:
+    - '"LLM inference"'
+    - '"LLM serving"'
+    - '"KV cache" AND (LLM OR language model)'
+    - '"speculative decoding"'
+    - '"Mixture of Experts" AND inference'
+    - '"GPU kernel" AND LLM'
+    - '"distributed inference"'
+    - '"LLM quantization"'
+
+personal_interest:
+  pd_disaggregation: 1.5
+  kv_cache: 1.5
+  moe: 1.5
+  cuda_graph: 1.4
+  kernel: 1.4
+  inference_runtime: 1.4
+  speculative_decoding: 1.2
+  quantization: 1.1
+  hardware: 1.2
+  generic_llm: 0.5
+
+topics:
+  runtime:
+    - vllm
+    - sglang
+    - tensorrt-llm
+    - rtp-llm
+    - lmdeploy
+    - llama.cpp
+    - inference serving
+    - serving engine
+
+  attention:
+    - attention
+    - flashattention
+    - flashinfer
+    - mla
+    - gqa
+    - mqa
+    - kv cache
+    - paged attention
+
+  moe:
+    - moe
+    - mixture of experts
+    - expert parallel
+    - expert parallelism
+    - all-to-all
+    - deepep
+    - deepgemm
+
+  speculative:
+    - speculative decoding
+    - speculative sampling
+    - medusa
+    - eagle
+    - mtp
+    - multi-token prediction
+
+  distributed:
+    - prefill decode
+    - pd disaggregation
+    - disaggregated inference
+    - kv transfer
+    - nixl
+    - rdma
+    - nvlink
+    - nccl
+    - distributed inference
+
+  kernel:
+    - cuda kernel
+    - triton
+    - cutlass
+    - cute
+    - tilelang
+    - operator optimization
+    - gemm
+    - gemv
+    - fused kernel
+
+  compiler:
+    - torch.compile
+    - torchinductor
+    - dynamo
+    - cuda graph
+    - compiler
+    - graph capture
+
+  quantization:
+    - quantization
+    - fp8
+    - fp4
+    - int8
+    - int4
+    - awq
+    - gptq
+
+  hardware:
+    - nvidia
+    - blackwell
+    - hopper
+    - h100
+    - h200
+    - b100
+    - b200
+    - amd
+    - mi300
+    - intel gpu
+    - npu
+    - tpu
+    - hbm
+
+analysis:
+  min_priority_to_report: 5
+  max_items_in_report: 30
+  # Max LLM calls per analyze run (after prefilter, highest-signal first).
+  max_items_per_run: 50
+  # Concurrent LLM requests.
+  llm_workers: 5
+  # Content chars sent to the LLM per item.
+  content_max_chars: 4000
+  # Zero-cost keyword prefilter. Items below min_score never reach the LLM.
+  prefilter:
+    enabled: true
+    min_score: 3.0
+    # arXiv items already passed curated queries; always let them through.
+    arxiv_bypass: true
